@@ -29,8 +29,6 @@ We see these patterns in the following scenarios:
 
 Async blocks are a simple syntactic feature that allows us to avoid abstruse patterns in order to convey simple ideas.
 
-Also, it doesn't mess with the entire module system. It's like, orthogonal and stuff.
-
 ## Example
 
 ```js
@@ -50,10 +48,10 @@ Here's the grammar:
 ```
 Statement:
   ...
-  AsyncBlockStatement
+  AsyncStatement
 
-AsyncBlockStatement :
-  `async` [no LineTerminator here] `{` AsyncFunctionBody `}`
+AsyncStatement :
+  `async` [no LineTerminator here] `{` StatementList[~Yield, +Await, ~Return] `}`
 ```
 
-The body of an async block has the exact same semantics as an arrow function body.
+Note: *ReturnStatement* is not allowed from the statement list of an async statement.
